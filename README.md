@@ -2,6 +2,8 @@
 
 A browser-based chess game with:
 
+**[Play Online](https://chess-game-movc.onrender.com/)**
+
 - Human vs Human mode
 - Human vs Computer mode
 - Online multiplayer room mode
