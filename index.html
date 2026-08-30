@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chess Game</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23222222'/%3E%3Cpath d='M18 16h28v5H18zm3 8h22v5H21zm-4 8h30v5H17zm8 8h14v5H25zm-8 8h30v5H17z' fill='%23f0d9b5'/%3E%3Cpath d='M25 8h14v8H25zm-3 3v5h20v-5zm-7 18h34v5H15zm2 10h30v5H17zm8 10h14v5H25z' fill='%23b58863'/%3E%3Ccircle cx='32' cy='32' r='11' fill='%23d9d9d9'/%3E%3Cpath d='M26 32h12v3H26zm-2 5h16v3H24zM32 20v24M20 32h24' stroke='%23222222' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E" />
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="game-shell">
+        <header class="topbar">
+            <div class="title-wrap">
+                <span class="brand-mark">♟</span>
+                <h1>Chess Game</h1>
+            </div>
+
+            <div class="mode-row">
+                <label for="game-mode" class="mode-label">Mode</label>
+                <select id="game-mode">
+                    <option value="pvc" selected>Human vs Computer</option>
+                    <option value="pvp">Human vs Human</option>
+                    <option value="online">Online Multiplayer</option>
+                </select>
+            </div>
+        </header>
+
+        <div class="control-strip">
+            <div id="board-status" class="status-banner">Game is ongoing.</div>
+
+            <div id="toolbar">
+                <button id="restart-btn">Restart</button>
+                <button id="sound-btn">Sound: On</button>
+            </div>
+        </div>
+
+        <div id="online-controls" class="online-controls hidden">
+            <button id="create-room-btn" type="button">Create Room</button>
+            <div class="join-room-box">
+                <input id="room-code-input" type="text" maxlength="5" placeholder="Room code" />
+                <button id="join-room-btn" type="button">Join Room</button>
+            </div>
+        </div>
+
+        <div id="timer-panel">
+            <div class="timer-box white-box">
+                <span>White</span>
+                <strong id="white-timer">05:00</strong>
+            </div>
+            <div class="timer-box black-box">
+                <span>Black</span>
+                <strong id="black-timer">05:00</strong>
+            </div>
+        </div>
+
+        <div class="scoreboard" aria-label="Scoreboard panel">
+            <div class="scoreboard-header">
+                <span class="score-label">Scoreboard</span>
+                <span id="current-turn-badge" class="turn-badge">White to move</span>
+            </div>
+
+            <div class="score-grid">
+                <div class="score-card white-card">
+                    <span>White</span>
+                    <strong id="white-score">0</strong>
+                </div>
+                <div class="score-card black-card">
+                    <span>Black</span>
+                    <strong id="black-score">0</strong>
+                </div>
+            </div>
+        </div>
+
+        <div id="board-wrapper">
+            <div id="board"></div>
+
+            <aside id="captured-panel">
+                <div class="captured-group">
+                    <h2>White captured</h2>
+                    <div id="white-captured" class="captured-list"></div>
+                </div>
+                <div class="captured-group">
+                    <h2>Black captured</h2>
+                    <div id="black-captured" class="captured-list"></div>
+                </div>
+                <div id="side-warning" class="side-warning">Safe position</div>
+            </aside>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
